@@ -1,0 +1,243 @@
+body{
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--theme-font-style)
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+ul, ol {
+  list-style-position: inside;
+}
+
+li::marker{
+  color: var(--color-purple);   
+}
+
+/* general */
+
+:root{
+  --theme-color: hsl(0deg, 0%, 2%);
+  --color-purple: #A546ED;
+  --definition-example: hsl(0deg, 0%, 46%);
+  --search-bg: hsl(0deg, 0%, 96%);
+  --theme-font-style: "Inter", sans-serif;
+}
+
+h2{
+  font-family: 26px;
+  padding: 20px 0 0 0;
+}
+
+h3{
+  font-weight: 400;
+  font-size: 22px;
+  padding: 20px 0 10px 0;
+}
+
+.definition{
+  font-style: italic;
+}
+
+.phonetic{
+  color: var(--color-purple);
+}
+
+.definition_text{
+  font-size: 18px;
+  padding: 10px 10px 10px 0;
+}
+
+.definition_example{
+  color: var(--definition-example);
+  padding-top: 5px;
+}
+
+/* btn slider */
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: hsl(0deg, 0%, 46%);
+  -webkit-transition: .4s;
+  transition: .4s;
+  scale: .7;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 10px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #A546ED;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #A546ED;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* btn slider - end */
+
+/* Navigation */
+
+nav{
+  display: grid;
+  width: 80%;
+  padding: 40px 0;
+  grid-template-columns: 3fr 1fr 1fr;
+}
+
+/* Search bar*/
+
+.search-container{
+  position: relative;
+  width: 80%;
+}
+
+.search-container input{
+  box-sizing: border-box;
+  background-color: var(--search-bg);
+  border: none;
+  padding: 20px 0px 20px 20px;
+  width: 100%;
+  border-radius: 15px;
+  color: var(--theme-color);
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--theme-font-style)
+}
+
+.search-container input:focus{
+  outline: 2px solid var(--color-purple);
+}
+.search-container > label > button{
+  background-color: transparent;
+  position: absolute;
+  border-color: transparent;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-48%);
+  cursor: pointer;
+  padding: 20px;
+}
+
+/* Result */
+
+.main-container{
+  width: 80%;
+  padding-top: 40px;
+}
+
+.result{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas: 
+    "title button"
+    "phonetic button";
+  gap: 10px;
+}
+
+.result .title{
+  grid-area: title;
+  font-size: 56px;
+  font-weight: 700;
+}
+
+.result .phonetic{
+  grid-area: phonetic;
+}
+
+.audio-play{
+  grid-area: button;
+  border: none;
+  background-color: unset;
+  cursor: pointer;
+  width: max-content;
+  justify-self: end;
+  align-self: center;
+}
+
+.audio-play .icon-play path,
+.audio-play .icon-play circle {
+  transition: .3s ease-in-out;
+}
+
+.audio-play:hover .icon-play path  {
+  fill: #fff;
+}
+
+.audio-play:hover .icon-play circle  {
+  opacity: .90; 
+}
+
+/* Definition */
+
+.synonyms-list{
+  font-size: 22px;
+  color: var(--definition-example);
+  padding: 20px 0;
+}
+
+.searchAnchor{
+  color: var(--color-purple);
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.searchAnchor:hover{
+  text-decoration: underline;
+}

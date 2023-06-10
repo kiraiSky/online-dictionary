@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<!-- https://fem-dictionary-web-app.vercel.app/#keyboard -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@400;700&family=Lora:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./js/script.js" defer></script>
+    <title>Dictionary</title>
+  </head>
+  <body>
+    <nav>
+      <img src="./img/logo.svg" alt="book logo" />
+      <ul>
+        <span>Serif</span>
+        <li class="font-sans-serif">Sans Serif</li>
+        <li class="font-serif">Serif</li>
+        <li class="font-mono">Mono</li>
+      </ul>
+      <div class="themes">
+        <div class="light-mode">
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+
+          <label for="toggle-slider"></label>
+          <img src="./img/icon-moon.svg" alt="" />
+        </div>
+      </div>
+    </nav>
+
+    <div class="search-container">
+      <input
+        name="search"
+        class="searchBox"
+        type="text"
+        placeholder="Search for any word..."
+      />
+      <label for="search">
+        <button type="button" class="btn" id="search-btn">
+          <img src="./img/icon-search.svg" alt="" />
+        </button>
+      </label>
+    </div>
+
+    <section class="main-container" id="main-container">
+      <div class="result">
+        <h1 class="title">keyboard</h1>
+        <button class="audio-play">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="75"
+            height="75"
+            viewBox="0 0 75 75"
+            class="icon-play"
+          >
+            <g fill="#A445ED" fill-rule="evenodd">
+              <circle cx="37.5" cy="37.5" r="37.5" opacity=".25" />
+              <path d="M29 27v21l21-10.5z" />
+            </g>
+          </svg>
+        </button>
+        <span class="phonetic">/ˈkiːbɔːd/</span>
+      </div>
+
+      <!-- Description -->
+      <h2 class="definition">noun</h2>
+
+      <h3>Meaning</h3>
+      <ul>
+        <li class="definition_text">
+          A sandbank or sandbar creating a shallow.
+        </li>
+        <li class="definition_text">
+          To become shallow.
+          <p class="definition_example">
+            The colour of the water shows where it shoals.
+          </p>
+        </li>
+      </ul>
+
+      <!-- Description -->
+      <h2 class="definition">Exclamation</h2>
+
+      <h3>Meaning</h3>
+      <ul>
+        <li class="definition_text">
+          A sandbank or sandbar creating a shallow.
+        </li>
+        <li class="definition_text">
+          To become shallow.
+          <p class="definition_example">
+            The colour of the water shows where it shoals.
+          </p>
+        </li>
+      </ul>
+
+      <p class="synonyms-list">
+        Synonyms
+        <a class="searchAnchor">electronic keyboard</a>
+      </p>
+
+      <!-- Description -->
+      <h2 class="definition">Verb</h2>
+
+      <h3>Meaning</h3>
+      <ul>
+        <li class="definition_text">
+          A sandbank or sandbar creating a shallow.
+        </li>
+        <li class="definition_text">
+          To become shallow.
+          <p class="definition_example">
+            The colour of the water shows where it shoals.
+          </p>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
