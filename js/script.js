@@ -1,16 +1,14 @@
 const searchBoxBtn = document.querySelector("#search-btn");
 const searchBox = document.querySelector(".searchBox");
 const mainContainer = document.querySelector(".main-container");
+const errorContainer = document.querySelector(".error-container");
 
 searchBox.addEventListener("keypress", (event) => {
   const word = document.querySelector(".searchBox").value;
-  if (event.key == "Enter" && word != "") {
+  if (event.key == "Enter") {
     event.target.placeholder = "Search for any word...";
     event.target.style.outline = "";
     handleSearch(word);
-  } else {
-    // event.target.placeholder = "Empty words are not valid, try other word";
-    // event.target.style.outline = "2px solid red";
   }
 });
 
@@ -20,26 +18,41 @@ searchBoxBtn.addEventListener("click", (event) => {
   handleSearch(word);
 });
 
-function handleSearch(word) {
-  clearResult();
-
-  const response = fetch(
-    `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-  );
-
-  response
-    .then((responseObj) => {
-      return responseObj.json();
-    })
-    .then((body) => {
-      handleResponse(body);
-    })
-    .catch(() => {
-      showError();
-    });
+function isEmpty(word) {
+  if (word === "") {
+    return true;
+  } else {
+    return false;
+  }
 }
 
-function showError() {}
+function handleSearch(word) {
+  clearResult();
+  if (isEmpty(word)) {
+    showError();
+  } else {
+    const response = fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+    );
+
+    response
+      .then((responseObj) => {
+        return responseObj.json();
+      })
+      .then((body) => {
+        handleResponse(body);
+      })
+      .catch(() => {
+        showError();
+      });
+  }
+}
+
+function showError() {
+  errorContainer.style.display = "block";
+  searchBox.placeholder = "Empty words are not valid, please try another word.";
+  searchBox.style.outline = "1px solid #ff574d";
+}
 
 function handleResponse(polysemousWords) {
   Object.keys(polysemousWords).forEach((index) => {
@@ -87,7 +100,7 @@ function createDescription(partOfSpeech, synonyms, definitionsGroup) {
     if (definitionsGroup[i].example !== "") {
       const exampleElement = document.createElement("p");
       exampleElement.classList.add("definition_example");
-      exampleElement.innerText = definitionsGroup[i].example;
+      exampleElement.innerText = '"' + definitionsGroup[i].example + '"';
       definition_text.appendChild(exampleElement);
     }
   }
@@ -108,6 +121,7 @@ function createDescription(partOfSpeech, synonyms, definitionsGroup) {
 }
 
 function clearResult() {
+  errorContainer.style.display = "none";
   while (mainContainer.firstChild) {
     mainContainer.firstChild.remove();
   }
