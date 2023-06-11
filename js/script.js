@@ -164,6 +164,37 @@ function createResult(title, phonetic, audio) {
   mainContainer.appendChild(divResult);
 }
 
-// playAudio();
+const dropdownMenus = document.querySelectorAll("[data-dropdown]");
 
-handleSearch("real");
+dropdownMenus.forEach((menu) => {
+  menu.addEventListener("touchstart", handleClick);
+  menu.addEventListener("click", handleClick);
+});
+
+function handleClick(event) {
+  event.preventDefault();
+  this.classList.add("active");
+  outsideClick(this, () => {
+    this.classList.remove("active");
+  });
+}
+
+function outsideClick(element, callback) {
+  const html = document.documentElement;
+  const outside = "data-outside";
+
+  if (!element.hasAttribute(outside)) {
+    html.addEventListener("click", handleOutsideClick);
+    element.setAttribute(outside, "");
+
+    function handleOutsideClick(event) {
+      if (!element.contains(event.target)) {
+        callback();
+        element.removeAttribute(outside);
+        html.removeEventListener("click", handleOutsideClick);
+      }
+    }
+  }
+}
+
+handleSearch("keyboard");
