@@ -53,12 +53,13 @@ h3{
 
 .definition_text{
   font-size: 18px;
-  padding: 10px 10px 10px 0;
+  padding: 10px 10px 10px 20px;
 }
 
 .definition_example{
   color: var(--definition-example);
-  padding-top: 5px;
+  padding-top: 8px;
+  padding-left: 20px;
 }
 
 /* btn slider */
@@ -178,7 +179,7 @@ nav{
 
 .main-container, .error-container{
   width: 80%;
-  padding-top: 40px;
+  padding: 40px 0;
 }
 
 .result{
@@ -248,19 +249,22 @@ nav{
   height: 40vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   display: none;
+  width: 80%;
 }
-
-.error-container > p{
-  text-align: center;
-}
-
 .emoji{
   font-size: 56px;
   margin: 0;
   line-height: 100%;
   margin-bottom: 20px;
+  width: 100% !important;
+}
+
+.error-container > p{
+  text-align: center;
+  max-width: 700px;
+  min-width: 280px;
 }
 
 .error-container h1{
