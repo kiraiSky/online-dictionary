@@ -33,8 +33,13 @@ function handleSearch(word) {
     })
     .then((body) => {
       handleResponse(body);
+    })
+    .catch(() => {
+      showError();
     });
 }
+
+function showError() {}
 
 function handleResponse(polysemousWords) {
   Object.keys(polysemousWords).forEach((index) => {
@@ -52,7 +57,6 @@ function handleResponse(polysemousWords) {
       Object.keys(definitions).forEach((j) => {
         const definition = definitions[j].definition;
         const example = definitions[j].example ?? "";
-        // console.log(example);
         const objDefinitions = { definition: definition, example: example };
         definitionsGroup.push(objDefinitions);
       });
@@ -80,16 +84,27 @@ function createDescription(partOfSpeech, synonyms, definitionsGroup) {
     definition_text.classList.add("definition_text");
     definition_text.innerText = definitionsGroup[i].definition;
     definition_list.appendChild(definition_text);
-    console.log(definitionsGroup[i].example);
     if (definitionsGroup[i].example !== "") {
       const exampleElement = document.createElement("p");
       exampleElement.classList.add("definition_example");
       exampleElement.innerText = definitionsGroup[i].example;
       definition_text.appendChild(exampleElement);
-      console.log("oi");
     }
   }
   mainContainer.appendChild(definition_list);
+  if (synonyms.length > 0) {
+    const pElement = document.createElement("p");
+    pElement.innerText = "Synonyms";
+    pElement.classList.add("synonyms-list");
+
+    for (let i = 0; i < synonyms.length; i++) {
+      const anchorElement = document.createElement("a");
+      anchorElement.classList.add("searchAnchor");
+      anchorElement.innerText = synonyms[i];
+      pElement.appendChild(anchorElement);
+    }
+    mainContainer.appendChild(pElement);
+  }
 }
 
 function clearResult() {
@@ -122,3 +137,5 @@ function createResult(title, phonetic, audio) {
   divResult.appendChild(btn);
   mainContainer.appendChild(divResult);
 }
+
+handleSearch("keyboard");
