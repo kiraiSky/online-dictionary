@@ -49,7 +49,7 @@ function handleSearch(word) {
 }
 
 function showError() {
-  errorContainer.style.display = "block";
+  errorContainer.style.display = "flex";
   searchBox.placeholder = "Empty words are not valid, please try another word.";
   searchBox.style.outline = "1px solid #ff574d";
 }
@@ -58,7 +58,8 @@ function handleResponse(polysemousWords) {
   Object.keys(polysemousWords).forEach((index) => {
     const title = polysemousWords[index].word;
     const phonetic = polysemousWords[index].phonetic;
-    const audio = polysemousWords[index].phonetics.sourceUrl;
+    const audio = polysemousWords[index].phonetics[0].audio;
+    console.log("audio: " + audio);
     createResult(title, phonetic, audio);
 
     Object.keys(polysemousWords[index].meanings).forEach((key) => {
@@ -139,17 +140,30 @@ function createResult(title, phonetic, audio) {
   phoneticElement.classList.add("phonetic");
   phoneticElement.innerText = phonetic;
 
+  // console.log(audio);
   const btn = document.createElement("button");
   btn.classList.add("audio-play");
+
+  const audioPlayer = document.createElement("audio");
+  audioPlayer.id = "audio-player";
+  audioPlayer.innerHTML = `<source src="${audio}" type="audio/mpeg"> Seu navegador não suporta o elemento de áudio.`;
+
+  btn.addEventListener("click", () => {
+    audioPlayer.play();
+  });
+
   const svg = document.createElement("svg");
   svg.innerHTML =
     '<svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 75 75" class="icon-play" > <g fill="#A445ED" fill-rule="evenodd"> <circle cx="37.5" cy="37.5" r="37.5" opacity=".25" /> <path d="M29 27v21l21-10.5z" /> </g>';
 
   btn.appendChild(svg);
+  btn.appendChild(audioPlayer);
   divResult.appendChild(titleElement);
   divResult.appendChild(phoneticElement);
   divResult.appendChild(btn);
   mainContainer.appendChild(divResult);
 }
 
-handleSearch("keyboard");
+// playAudio();
+
+handleSearch("real");
