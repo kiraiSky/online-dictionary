@@ -205,23 +205,25 @@ document.querySelectorAll("#font-theme > ul > li").forEach((element) => {
   element.addEventListener("click", changeFont);
 });
 
+const mainFont = document.querySelector("#font-theme > li > p");
+
 function changeFont() {
   const font = getComputedStyle(this);
-  const mainFont = document.querySelector("#font-theme > li > p");
-  console.log(mainFont);
   mainFont.innerText = this.querySelector("a").innerText;
 
   document.documentElement.style.setProperty(
     "--theme-font-style",
     `${font.fontFamily}`
   );
+  localStorage.setItem("--theme-font-style", font.fontFamily);
+  localStorage.setItem("font-name", this.querySelector("a").innerText);
 }
+const slider = document.querySelector(".light-mode input");
 
 document.querySelector(".light-mode").addEventListener("click", toggleTheme);
 
 function toggleTheme(event) {
   event.preventDefault();
-  const slider = document.querySelector(".light-mode input");
   if (slider.checked === true) {
     slider.checked = false;
     document.documentElement.style.setProperty("--theme-bg-color", "#fff");
@@ -234,6 +236,12 @@ function toggleTheme(event) {
       "hsl(0deg, 0%, 96%)"
     );
     document.documentElement.style.setProperty("--dropdown-bg", "#fff");
+
+    localStorage.setItem("--theme-bg-color", "#fff");
+    localStorage.setItem("--theme-color", "hsl(0deg, 0%, 2%)");
+    localStorage.setItem("--search-bg", "hsl(0deg, 0%, 96%)");
+    localStorage.setItem("--dropdown-bg", "#fff");
+    localStorage.setItem("selected", false);
   } else {
     slider.checked = true;
     document.documentElement.style.setProperty("--theme-bg-color", "#000");
@@ -243,5 +251,28 @@ function toggleTheme(event) {
       "hsl(0deg, 0%, 12%)"
     );
     document.documentElement.style.setProperty("--dropdown-bg", "#232323");
+
+    localStorage.setItem("--theme-bg-color", "#000");
+    localStorage.setItem("--theme-color", "#fff");
+    localStorage.setItem("--search-bg", "hsl(0deg, 0%, 12%)");
+    localStorage.setItem("--dropdown-bg", "#232323");
+    localStorage.setItem("selected", true);
   }
 }
+
+window.onload = function getTheme() {
+  const bgColor = localStorage.getItem("--theme-bg-color");
+  const themeColor = localStorage.getItem("--theme-color");
+  const bgSearch = localStorage.getItem("--search-bg");
+  const bgDropdown = localStorage.getItem("--dropdown-bg");
+  const fontStyle = localStorage.getItem("--theme-font-style");
+  const fontName = localStorage.getItem("font-name");
+
+  mainFont.innerText = fontName;
+  slider.checked = localStorage.getItem("selected") == "true" ? true : false;
+  document.documentElement.style.setProperty("--theme-bg-color", bgColor);
+  document.documentElement.style.setProperty("--theme-color", themeColor);
+  document.documentElement.style.setProperty("--search-bg", bgSearch);
+  document.documentElement.style.setProperty("--dropdown-bg", bgDropdown);
+  document.documentElement.style.setProperty("--theme-font-style", fontStyle);
+};
