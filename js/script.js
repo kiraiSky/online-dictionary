@@ -198,3 +198,47 @@ function outsideClick(element, callback) {
 }
 
 handleSearch("keyboard");
+
+// --theme-font-style: "Inter", sans-serif;
+
+document.querySelectorAll("#font-theme > ul > li").forEach((element) => {
+  element.addEventListener("click", changeFont);
+});
+
+function changeFont() {
+  const font = getComputedStyle(this);
+  document.documentElement.style.setProperty(
+    "--theme-font-style",
+    `${font.fontFamily}`
+  );
+}
+
+document.querySelector(".light-mode").addEventListener("click", toggleTheme);
+
+function toggleTheme(event) {
+  event.preventDefault();
+  const slider = document.querySelector(".light-mode input");
+  if (slider.checked === true) {
+    slider.checked = false;
+    document.documentElement.style.setProperty("--theme-bg-color", "#fff");
+    document.documentElement.style.setProperty(
+      "--theme-color",
+      "hsl(0deg, 0%, 2%)"
+    );
+    document.documentElement.style.setProperty(
+      "--search-bg",
+      "hsl(0deg, 0%, 96%)"
+    );
+  } else {
+    slider.checked = true;
+    document.documentElement.style.setProperty("--theme-bg-color", "#000");
+    document.documentElement.style.setProperty("--theme-color", "#fff");
+    document.documentElement.style.setProperty(
+      "--search-bg",
+      "hsl(0deg, 0%, 12%)"
+    );
+  }
+
+  console.log(slider);
+  // event.preventDefault();
+}
