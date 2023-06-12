@@ -207,6 +207,10 @@ document.querySelectorAll("#font-theme > ul > li").forEach((element) => {
 
 function changeFont() {
   const font = getComputedStyle(this);
+  const mainFont = document.querySelector("#font-theme > li > p");
+  console.log(mainFont);
+  mainFont.innerText = this.querySelector("a").innerText;
+
   document.documentElement.style.setProperty(
     "--theme-font-style",
     `${font.fontFamily}`
@@ -229,6 +233,7 @@ function toggleTheme(event) {
       "--search-bg",
       "hsl(0deg, 0%, 96%)"
     );
+    document.documentElement.style.setProperty("--dropdown-bg", "#fff");
   } else {
     slider.checked = true;
     document.documentElement.style.setProperty("--theme-bg-color", "#000");
@@ -237,8 +242,6 @@ function toggleTheme(event) {
       "--search-bg",
       "hsl(0deg, 0%, 12%)"
     );
+    document.documentElement.style.setProperty("--dropdown-bg", "#232323");
   }
-
-  console.log(slider);
-  // event.preventDefault();
 }

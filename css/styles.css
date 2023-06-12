@@ -32,7 +32,8 @@ li::marker{
   --definition-example: hsl(0deg, 0%, 46%);
   --search-bg: hsl(0deg, 0%, 96%);
   --theme-font-style: "Inter", sans-serif;
-  --theme-bg-color: #fff
+  --theme-bg-color: #fff;
+  --dropdown-bg: #fff
 }
 
 h2{
@@ -139,7 +140,7 @@ nav{
   display: grid;
   width: 80%;
   padding: 40px 0;
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 4fr 2fr 1fr;
 }
 
 nav > a{
@@ -185,12 +186,14 @@ nav a:hover{
 
 #font-theme > li{
   align-self: center;
+  display: flex;
+  align-items: center;
 }
 
 
 #font-theme > ul {
   z-index: 2;
-  background-color: #fff;
+  background-color: var(--dropdown-bg);
   box-shadow: 0px 5px 30px rgba(0, 0, 0, .1);
   width: 190px;
   border-radius: 10px;
