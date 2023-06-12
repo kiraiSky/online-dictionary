@@ -4,7 +4,9 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: var(--theme-font-style)
+  font-family: var(--theme-font-style);
+  background-color: var(--theme-bg-color);
+  color: var(--theme-color);
 }
 
 *{
@@ -30,6 +32,7 @@ li::marker{
   --definition-example: hsl(0deg, 0%, 46%);
   --search-bg: hsl(0deg, 0%, 96%);
   --theme-font-style: "Inter", sans-serif;
+  --theme-bg-color: #fff
 }
 
 h2{
@@ -199,7 +202,6 @@ nav a:hover{
   display: none;
 }
 
-
 #font-theme:hover > ul, #font-theme.active > ul{
   display: block;
   animation: show-up .3s forwards;
@@ -230,6 +232,7 @@ nav > .themes{
 
 nav > .themes > .light-mode{
   display: flex;
+  cursor: pointer;
 }
 
 /* Search bar*/
